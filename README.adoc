@@ -34,8 +34,8 @@ Simple example over how to know how getting started with Kubebuilder
 |https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl[Install kubectl]
 |Access to a Kubernetes v1.11.3+ cluster
 |https://book.kubebuilder.io/quick-start.html#installation[kubebuilder]
+|https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md[kustomize]
 |===
-
 
 == Getting Started
 
@@ -120,6 +120,8 @@ NOTE: To uninstall you need be logged in as a user with cluster privileges like 
 
 Following the steps used to create this project
 
+- As a requirement to do it you need be logged in as a user with cluster privileges like the system:admin user. E.g. By using: oc login -u system:admin.
+
 - To create the project
 ```shell
 $ mkdir mkdir memcached-kubebuilder
@@ -134,7 +136,6 @@ $ kubebuilder create api --group memcached --version v1 --kind Memcached #Select
 ```
 
 - Update the `api/v1/memcached_types.go` as follows to add the specs and status
-
 
 ```go
 // MemcachedSpec defines the desired state of Memcached
@@ -285,6 +286,8 @@ NOTE: You need perform the login into your regestry locally for the `docker-push
 NOTE: Just for tests purposes make the image public and setting up the cluster to allow use insecure registry. ( E.g --insecure-registry 172.30.0.0/16 )
 
 IMPORTANT: See that the Watches were not implemented in this example so far.
+
+- Run `make install`
 
 - Now, you are able to test it. Run `make app/install`. Note that as result of it you should be able to check 1 pod running for the operator manager and another one for the Memcached.
 
